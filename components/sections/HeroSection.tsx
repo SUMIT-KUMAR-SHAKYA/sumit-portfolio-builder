@@ -11,7 +11,7 @@ const fadeUp = {
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { delay: i * 0.12, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as any },
   }),
 };
 
@@ -19,7 +19,7 @@ const floatOrb = {
   animate: {
     y: [-20, 20, -20],
     x: [-10, 10, -10],
-    transition: { repeat: Infinity, duration: 8, ease: "easeInOut" },
+    transition: { repeat: Infinity, duration: 8, ease: "easeInOut" as any },
   },
 };
 
@@ -27,7 +27,7 @@ const floatOrb2 = {
   animate: {
     y: [20, -20, 20],
     x: [10, -10, 10],
-    transition: { repeat: Infinity, duration: 10, ease: "easeInOut" },
+    transition: { repeat: Infinity, duration: 10, ease: "easeInOut" as any },
   },
 };
 
