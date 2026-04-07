@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─── */
+:root {
+  --bg-primary: #030712;
+  --bg-secondary: #0f172a;
+  --bg-card: #0d1526;
+  --accent-teal: #2dd4bf;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a78bfa;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --border: #1e293b;
+  --border-bright: #334155;
+  --glass: rgba(15, 23, 42, 0.7);
+  --glass-bright: rgba(30, 41, 59, 0.8);
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-accent: var(--accent-teal);
+}
+
+/* ─── Base ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", "Geist Sans", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-teal);
+}
+
+/* ─── Gradient Text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow effects ─── */
+.glow-teal {
+  box-shadow: 0 0 30px rgba(45, 212, 191, 0.2), 0 0 60px rgba(45, 212, 191, 0.05);
+}
+.glow-cyan {
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+}
+
+/* ─── Glass card ─── */
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+/* ─── Grid background ─── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ─── Shimmer button ─── */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-shimmer:hover::after {
+  left: 125%;
+}
+
+/* ─── Section spacing ─── */
+.section-padding {
+  padding: 6rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 8rem 2rem;
+  }
+}
+
+/* ─── Builder editable ─── */
+[contenteditable="true"] {
+  outline: 2px dashed rgba(45, 212, 191, 0.5);
+  outline-offset: 4px;
+  border-radius: 4px;
+  cursor: text;
+  min-width: 20px;
+  min-height: 1em;
+}
+[contenteditable="true"]:focus {
+  outline: 2px solid var(--accent-teal);
+  background: rgba(45, 212, 191, 0.05);
+}
