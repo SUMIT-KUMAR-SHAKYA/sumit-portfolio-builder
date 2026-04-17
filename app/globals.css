@@ -81,23 +81,104 @@ body {
   border: 1px solid var(--border);
 }
 
-/* ─── Grid background ─── */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(45, 212, 191, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 212, 191, 0.04) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: floatingGrid 20s linear infinite;
+/* ─── High-End Floating Lines Background ─── */
+.floating-lines-bg {
+  background-color: #030712;
+  background-image: 
+    linear-gradient(rgba(45, 212, 191, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  position: relative;
 }
 
-@keyframes floatingGrid {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 50px 50px;
-  }
+.floating-lines-bg::before,
+.floating-lines-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
+
+.floating-lines-bg::before {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 98px,
+    rgba(45, 212, 191, 0.03) 99px,
+    rgba(45, 212, 191, 0.03) 100px
+  );
+  animation: bg-scroll-v 40s linear infinite;
+}
+
+.floating-lines-bg::after {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 148px,
+    rgba(45, 212, 191, 0.03) 149px,
+    rgba(45, 212, 191, 0.03) 150px
+  );
+  animation: bg-scroll-h 60s linear infinite;
+}
+
+@keyframes bg-scroll-v {
+  from { background-position: 0 0; }
+  to { background-position: 0 1000px; }
+}
+
+@keyframes bg-scroll-h {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 0; }
+}
+
+.font-jakarta {
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+/* ─── Binary Rain CSS (Cyber Aesthetics) ─── */
+.binary-rain-edge {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.binary-rain-edge::before {
+  content: "01011001 10100101 01101111 11001010 01010101 10110011 10010101";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 10px;
+  height: 200%;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 8px;
+  line-height: 1;
+  color: rgba(45, 212, 191, 0);
+  writing-mode: vertical-rl;
+  text-shadow: 0 0 8px rgba(45, 212, 191, 0.8);
+  transition: color 0.3s, opacity 0.3s;
+  animation: matrix-fall 10s linear infinite;
+  opacity: 0;
+}
+
+.pc-card-shell:hover .binary-rain-edge::before {
+  color: rgba(45, 212, 191, 0.5);
+  opacity: 1;
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0%); }
+}
+
+/* ─── Seamless Glow (Border Glow Optimization) ─── */
+.glow-border-active {
+  box-shadow: 0 0 30px rgba(45, 212, 191, 0.6), inset 0 0 20px rgba(45, 212, 191, 0.4);
+}
+
+
 
 
 /* ─── Shimmer button ─── */

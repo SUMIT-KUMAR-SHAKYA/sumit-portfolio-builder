@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
   display: "swap",
 });
 
@@ -33,8 +39,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased bg-[#030712] text-[#f8fafc]">
+    <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`}>
+      <body className="antialiased bg-[#030712] text-[#f8fafc] w-full min-h-screen relative overflow-x-hidden">
+        {/* Floating Lines Master Background */}
+        <div className="fixed inset-0 z-[-1] pointer-events-none floating-lines-bg opacity-30" />
         {children}
       </body>
     </html>

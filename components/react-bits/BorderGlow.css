@@ -13,19 +13,15 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: conic-gradient(
-    from calc(var(--cursor-angle) - var(--cone-spread) * 1deg) at 50% 50%,
-    transparent 0,
-    var(--gradient-one) 10%,
-    var(--gradient-two) 20%,
-    var(--gradient-three) 30%,
-    var(--gradient-four) 40%,
-    var(--gradient-five) 50%,
-    var(--gradient-six) 60%,
+  background: radial-gradient(
+    600px circle at var(--pointer-x) var(--pointer-y),
+    var(--gradient-one) 0%,
+    var(--gradient-two) 25%,
+    var(--gradient-three) 50%,
     transparent 100%
   );
   opacity: calc(var(--edge-proximity) / 100);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: -1;
 }
 

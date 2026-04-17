@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { GitHubIcon, XIcon, LinkedInIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
+import GlitchText from "@/components/react-bits/GlitchText";
 
 export default function ContactSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -50,9 +51,11 @@ export default function ContactSection() {
           <Mail size={14} />
           Get In Touch
         </div>
-        <h2 className="text-3xl sm:text-5xl font-black text-[#f8fafc] mb-4">
-          Let&apos;s <span className="gradient-text">Work Together</span>
-        </h2>
+        <div className="text-3xl sm:text-5xl font-black text-[#f8fafc] mb-4">
+          <GlitchText speed={1.5} enableShadows={true} enableOnHover={true} className="text-3xl sm:text-5xl font-black inline-block">
+            Let&apos;s <span className="gradient-text">Work Together</span>
+          </GlitchText>
+        </div>
         <p className="text-[#475569] max-w-xl mx-auto text-sm sm:text-base">
           Have a project in mind or just want to say hello? My inbox is always
           open.

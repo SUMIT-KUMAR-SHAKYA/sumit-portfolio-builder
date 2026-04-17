@@ -47,11 +47,11 @@ export default function AboutSection() {
           <div className="w-full flex justify-center lg:justify-start">
             <ProfileCard
               name="Sumit Shakya"
-              title="IIIT Student | Aspiring Cybersecurity Engineer"
+              title="Sumit Shakya | IIIT Student | Aspiring Cybersecurity Engineer"
               handle="sumit"
               status="Open to work 🟢"
               contactText="Contact Me"
-              avatarUrl="https://github.com/sumit.png"
+              avatarUrl="/images/profile.png"
               showUserInfo={true}
               enableTilt={true}
               behindGlowColor="rgba(45, 212, 191, 0.4)"

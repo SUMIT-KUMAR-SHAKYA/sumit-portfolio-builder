@@ -1,5 +1,7 @@
 'use client';
-import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo, useState } from 'react';
+import Image from 'next/image';
+import { ShieldAlert } from 'lucide-react';
 import './ProfileCard.css';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
@@ -81,8 +83,8 @@ const ProfileCardComponent = ({
         '--pointer-from-center': `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
         '--pointer-from-top': `${percentY / 100}`,
         '--pointer-from-left': `${percentX / 100}`,
-        '--rotate-x': `${round(-(centerX / 5))}deg`,
-        '--rotate-y': `${round(centerY / 4)}deg`
+        '--rotate-x': `${round(-(centerX / 2.5))}deg`,
+        '--rotate-y': `${round(centerY / 2)}deg`
       };
 
       for (const [k, v] of Object.entries(properties)) wrap.style.setProperty(k, v as string);
@@ -305,44 +307,64 @@ const ProfileCardComponent = ({
     onContactClick?.();
   }, [onContactClick]);
 
+  const [imgError, setImgError] = useState(false);
+
   return (
-    <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()} style={cardStyle}>
+    <div ref={wrapRef} className={`pc-card-wrapper font-jakarta ${className}`.trim()} style={cardStyle}>
       {behindGlowEnabled && <div className="pc-behind" />}
-      <div ref={shellRef} className="pc-card-shell">
+      <div ref={shellRef} className="pc-card-shell group glass-card-hover rounded-[var(--card-radius)] border border-white/20 shadow-2xl backdrop-blur-md">
+        <div className="binary-rain-edge"></div>
         <section className="pc-card">
-          <div className="pc-inside">
+          <div className="pc-inside backdrop-blur-md">
             <div className="pc-shine" />
             <div className="pc-glare" />
-            <div className="pc-content pc-avatar-content">
-              {avatarUrl && (
-                <img
-                  className="avatar"
+            <div className="pc-content pc-avatar-content relative w-full h-full">
+              {!imgError && avatarUrl ? (
+                <Image
+                  className="avatar object-cover"
                   src={avatarUrl}
                   alt={`${name || 'User'} avatar`}
-                  loading="lazy"
-                  onError={e => {
-                    const t = e.target as HTMLImageElement;
-                    t.style.display = 'none';
-                  }}
+                  layout="fill"
+                  unoptimized
+                  onError={() => setImgError(true)}
                 />
+              ) : (
+                <div className="absolute inset-x-0 bottom-10 flex items-center justify-center avatar transform-gpu">
+                  <div className="w-48 h-48 rounded-full bg-teal-500/10 border border-teal-500/30 flex items-center justify-center glow-teal relative">
+                     <ShieldAlert size={80} className="text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)]" />
+                     {/* Inner animated digital ring */}
+                     <div className="absolute inset-0 rounded-full border border-teal-400/20 animate-[spin_4s_linear_infinite] border-dashed"></div>
+                  </div>
+                </div>
               )}
               {showUserInfo && (
                 <div className="pc-user-info">
                   <div className="pc-user-details">
-                    <div className="pc-mini-avatar">
-                      <img
-                        src={miniAvatarUrl || avatarUrl}
-                        alt={`${name || 'User'} mini avatar`}
-                        loading="lazy"
-                        onError={e => {
-                          const t = e.target as HTMLImageElement;
-                          t.style.opacity = '0.5';
-                          t.src = avatarUrl;
-                        }}
-                      />
+                    <div className="pc-mini-avatar flex-shrink-0">
+                      {!imgError && (miniAvatarUrl || avatarUrl) ? (
+                        <Image
+                          src={miniAvatarUrl || avatarUrl}
+                          alt={`${name || 'User'} mini avatar`}
+                          width={48}
+                          height={48}
+                          className="rounded-full object-cover w-full h-full"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-teal-500/10 flex items-center justify-center">
+                          <ShieldAlert size={20} className="text-teal-400" />
+                        </div>
+                      )}
                     </div>
                     <div className="pc-user-text">
-                      <div className="pc-handle">@{handle}</div>
+                      <a 
+                        href="https://x.com/SumitSh77415816" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="pc-handle font-bold text-teal-300 hover:text-teal-400 transition-colors pointer-events-auto"
+                      >
+                        @{handle}
+                      </a>
                       <div className="pc-status">{status}</div>
                     </div>
                   </div>

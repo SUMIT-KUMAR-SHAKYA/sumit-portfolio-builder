@@ -5,7 +5,6 @@ import { projects } from "@/lib/data";
 import { ExternalLink, FolderOpen, Star } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/BrandIcons";
 import BorderGlow from "@/components/react-bits/BorderGlow";
-import GlitchText from "@/components/react-bits/GlitchText";
 
 const badgeStyles = {
   teal: "bg-teal-500/15 text-teal-400 border-teal-500/30",
@@ -49,12 +48,15 @@ export default function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.15, duration: 0.6 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
               className="group relative rounded-2xl overflow-hidden h-full"
             >
               <BorderGlow
                 backgroundColor="#0a0f1e"
                 colors={[project.color, project.color, project.color]}
+                glowColor={project.color}
+                glowIntensity={3}
+                glowRadius={60}
+                edgeSensitivity={50}
                 className="h-full rounded-2xl"
               >
                 {/* Top accent bar */}
@@ -114,17 +116,9 @@ export default function ProjectsSection() {
                   </div>
 
                   {/* Title & Description */}
-                  {project.id === "movie-sentiment" ? (
-                    <div className="mb-2">
-                      <GlitchText speed={1} enableShadows={true} enableOnHover={true} className="text-xl sm:text-2xl">
-                        {project.title}
-                      </GlitchText>
-                    </div>
-                  ) : (
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#f8fafc] mb-2">
-                      {project.title}
-                    </h3>
-                  )}
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#f8fafc] mb-2">
+                    {project.title}
+                  </h3>
                   
                   <p className="text-[#94a3b8] text-sm leading-relaxed mb-4">
                     {project.description}
