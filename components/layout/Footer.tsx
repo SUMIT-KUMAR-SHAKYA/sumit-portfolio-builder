@@ -21,8 +21,8 @@ export default function Footer() {
               <span className="font-bold text-[#f8fafc]">{siteOwner.name}</span>
             </div>
             <p className="text-sm text-[#475569] leading-relaxed">
-              Full-Stack & AI/ML Engineer. Building products that scale and
-              matter.
+              IIIT Student & Aspiring Cybersecurity Engineer. Building secure, 
+              scalable solutions for the digital frontier.
             </p>
           </div>
 

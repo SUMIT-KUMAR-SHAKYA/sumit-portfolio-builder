@@ -104,12 +104,14 @@ export default function AboutSection() {
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200 hover:scale-105 cursor-default"
+                        className="px-3 py-1.5 rounded-lg text-xs font-bold border transition-all duration-200 hover:scale-110 hover:shadow-[0_0_15px_rgba(var(--glow-rgb),0.3)] cursor-default backdrop-blur-sm"
                         style={{
-                          borderColor: `${meta.color}30`,
-                          backgroundColor: `${meta.color}10`,
+                          borderColor: `${meta.color}40`,
+                          backgroundColor: `${meta.color}15`,
                           color: meta.color,
-                        }}
+                          // @ts-ignore
+                          "--glow-rgb": meta.color.replace('#', '')
+                        } as any}
                       >
                         {skill.name}
                       </motion.span>
