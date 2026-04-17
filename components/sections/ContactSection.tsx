@@ -20,6 +20,7 @@ export default function ContactSection() {
     e.preventDefault();
     setStatus("loading");
 
+    // EmailJS Template Parameters mapping
     const templateParams = {
       from_name: formData.name,
       from_email: formData.email,
@@ -30,10 +31,10 @@ export default function ContactSection() {
 
     emailjs
       .send(
-        "APNI_SERVICE_ID_YAHAN_DALO",
-        "APNI_TEMPLATE_ID_YAHAN_DALO",
+        "service_6rwp4tf",      // Tumhari Service ID
+        "template_rha1qc2",     // Tumhari Template ID
         templateParams,
-        "APNI_PUBLIC_KEY_YAHAN_DALO"
+        "w3v2LhXmGxLVi75P2"     // Tumhari Public Key
       )
       .then(
         (response) => {
@@ -69,8 +70,7 @@ export default function ContactSection() {
           </GlitchText>
         </div>
         <p className="text-[#475569] max-w-xl mx-auto text-sm sm:text-base">
-          Have a project in mind or just want to say hello? My inbox is always
-          open.
+          Have a project in mind or just want to say hello? My inbox is always open.
         </p>
       </motion.div>
 
@@ -125,7 +125,7 @@ export default function ContactSection() {
             <div className="text-xs text-[#475569] mb-3 font-semibold uppercase tracking-widest">Connect with me</div>
             <div className="flex flex-col gap-3">
               <a
-                href={siteOwner.socials.github}
+                href="https://github.com/SUMIT-KUMAR-SHAKYA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-between p-4 rounded-xl border border-teal-500/20 bg-teal-500/5 text-teal-400 hover:border-teal-500/60 hover:bg-teal-500/10 hover:shadow-[0_0_15px_rgba(45,212,191,0.15)] transition-all duration-300"
@@ -136,11 +136,11 @@ export default function ContactSection() {
                 </div>
                 <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
-              
+
               <div className="flex gap-3">
                 {[
                   { Icon: LinkedInIcon, href: siteOwner.socials.linkedin, label: "LinkedIn" },
-                  { Icon: XIcon, href: siteOwner.socials.twitter, label: "X / Twitter" },
+                  { Icon: XIcon, href: "https://x.com/SumitSh77415816", label: "X / Twitter" },
                 ].map(({ Icon, href, label }) => (
                   <a
                     key={label}
@@ -181,7 +181,7 @@ export default function ContactSection() {
                 <p className="text-[#94a3b8]">I will get back to you as soon as possible.</p>
               </div>
             )}
-            
+
             {status === "error" && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0f1e]/90 backdrop-blur z-10 rounded-2xl p-6 sm:p-8 text-center animate-in fade-in zoom-in duration-300">
                 <div className="w-16 h-16 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mb-4">
@@ -189,8 +189,8 @@ export default function ContactSection() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#f8fafc] mb-2">Something went wrong!</h3>
                 <p className="text-[#94a3b8]">Failed to send message. Please try again later.</p>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setStatus("idle")}
                   className="mt-4 px-6 py-2 rounded-lg bg-[#1e293b] text-white hover:bg-[#334155] transition-colors"
                 >
@@ -198,51 +198,36 @@ export default function ContactSection() {
                 </button>
               </div>
             )}
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {[
-                {
-                  id: "contact-name",
-                  label: "Name",
-                  type: "text",
-                  placeholder: "Your name",
-                  value: formData.name
-                },
-                {
-                  id: "contact-email",
-                  label: "Email",
-                  type: "email",
-                  placeholder: "your@email.com",
-                  value: formData.email
-                },
-              ].map((field) => (
-                <div key={field.id}>
-                  <label
-                    htmlFor={field.id}
-                    className="block text-xs font-medium text-[#94a3b8] mb-2"
-                  >
-                    {field.label}
-                  </label>
-                  <input
-                    id={field.id}
-                    type={field.type}
-                    value={field.value}
-                    onChange={handleChange}
-                    required
-                    placeholder={field.placeholder}
-                    className="w-full px-4 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-[#f8fafc] placeholder-[#334155] text-sm focus:outline-none focus:border-teal-500/60 focus:ring-1 focus:ring-teal-500/30 transition-all"
-                  />
-                </div>
-              ))}
+              <div key="contact-name">
+                <label htmlFor="contact-name" className="block text-xs font-medium text-[#94a3b8] mb-2">Name</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-[#f8fafc] placeholder-[#334155] text-sm focus:outline-none focus:border-teal-500/60 focus:ring-1 focus:ring-teal-500/30 transition-all"
+                />
+              </div>
+              <div key="contact-email">
+                <label htmlFor="contact-email" className="block text-xs font-medium text-[#94a3b8] mb-2">Email</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-[#f8fafc] placeholder-[#334155] text-sm focus:outline-none focus:border-teal-500/60 focus:ring-1 focus:ring-teal-500/30 transition-all"
+                />
+              </div>
             </div>
 
             <div>
-              <label
-                htmlFor="contact-subject"
-                className="block text-xs font-medium text-[#94a3b8] mb-2"
-              >
-                Subject
-              </label>
+              <label htmlFor="contact-subject" className="block text-xs font-medium text-[#94a3b8] mb-2">Subject</label>
               <input
                 id="contact-subject"
                 type="text"
@@ -255,12 +240,7 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <label
-                htmlFor="contact-message"
-                className="block text-xs font-medium text-[#94a3b8] mb-2"
-              >
-                Message
-              </label>
+              <label htmlFor="contact-message" className="block text-xs font-medium text-[#94a3b8] mb-2">Message</label>
               <textarea
                 id="contact-message"
                 rows={5}
@@ -286,4 +266,4 @@ export default function ContactSection() {
       </div>
     </section>
   );
-}
+} 
