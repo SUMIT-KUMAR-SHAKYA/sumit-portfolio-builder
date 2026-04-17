@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { GitHubIcon, XIcon, LinkedInIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
+import emailjs from '@emailjs/browser';
 import GlitchText from "@/components/react-bits/GlitchText";
 
 export default function ContactSection() {
@@ -18,24 +19,35 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (res.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setStatus("idle"), 5000);
-      } else {
-        setStatus("error");
-        setTimeout(() => setStatus("idle"), 5000);
-      }
-    } catch (err) {
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
-    }
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      to_name: "Sumit Kumar Shakya",
+    };
+
+    emailjs
+      .send(
+        "APNI_SERVICE_ID_YAHAN_DALO",
+        "APNI_TEMPLATE_ID_YAHAN_DALO",
+        templateParams,
+        "APNI_PUBLIC_KEY_YAHAN_DALO"
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setStatus("success");
+          setFormData({ name: "", email: "", subject: "", message: "" });
+          setTimeout(() => setStatus("idle"), 5000);
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          setStatus("error");
+          setTimeout(() => setStatus("idle"), 5000);
+        }
+      );
   };
 
   return (
