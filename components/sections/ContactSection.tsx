@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { GitHubIcon, XIcon, LinkedInIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
 import GlitchText from "@/components/react-bits/GlitchText";

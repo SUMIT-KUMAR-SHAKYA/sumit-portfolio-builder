@@ -42,7 +42,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`}>
       <body className="antialiased bg-[#030712] text-[#f8fafc] w-full min-h-screen relative overflow-x-hidden">
         {/* Floating Lines Master Background */}
-        <div className="fixed inset-0 z-[-1] pointer-events-none floating-lines-bg opacity-30" />
+        <div className="fixed inset-0 z-[-10] pointer-events-none floating-lines-bg opacity-30" />
         {children}
       </body>
     </html>

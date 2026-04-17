@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     // Email to the Site Owner (Sumit)
     const mailOptions = {
         from: `Portfolio Contact <${process.env.EMAIL_USER}>`,
-        to: "sumitshakyaportfolio@gmail.com", // Your monitoring email
+        to: "sumitshakyayt@gmail.com", // Your monitoring email
         subject: `[PRO] New Portfolio Contact: ${subject}`,
         html: `
             <div style="font-family: sans-serif; color: #333; max-width: 600px; padding: 20px; border: 1px solid #eee;">
