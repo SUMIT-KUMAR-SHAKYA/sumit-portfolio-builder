@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, ExternalLink, Sparkles } from "lucide-react";
+import { useAdmin } from "@/context/AdminContext";
+import Link from "next/link";
+import { ArrowDown, ExternalLink, Sparkles, Layers } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
 import GradientText from "@/components/react-bits/GradientText";
@@ -32,6 +34,8 @@ const floatOrb2 = {
 };
 
 export default function HeroSection() {
+  const { isAdmin } = useAdmin();
+
   return (
     <section
       id="hero"
@@ -126,10 +130,16 @@ export default function HeroSection() {
               size={15}
               className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
             />
-          </a>
-
-
-
+          </a>          {isAdmin && (
+            <Link
+              id="hero-builder-btn"
+              href="/builder"
+              className="group flex items-center gap-2 px-8 py-4 rounded-xl border border-purple-500/30 bg-purple-500/5 text-purple-400 font-semibold text-sm hover:border-purple-500/60 hover:bg-purple-500/10 transition-all duration-300 shadow-[0_0_15px_rgba(167,139,250,0.1)]"
+            >
+              <Layers size={15} />
+              Admin: Page Builder
+            </Link>
+          )}
           <a
             id="hero-github-btn"
             href={siteOwner.socials.github}

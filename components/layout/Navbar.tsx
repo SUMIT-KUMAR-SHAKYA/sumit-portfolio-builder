@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Layers } from "lucide-react";
 import { navLinks, siteOwner } from "@/lib/data";
+import { useAdmin } from "@/context/AdminContext";
 
 export default function Navbar() {
+  const { isAdmin } = useAdmin();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -51,13 +53,15 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <Link
-              href="/builder"
-              className="ml-3 flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-black text-sm font-semibold btn-shimmer hover:from-teal-400 hover:to-cyan-400 transition-all duration-200"
-            >
-              <Layers size={14} />
-              Page Builder
-            </Link>
+            {isAdmin && (
+              <Link
+                href="/builder"
+                className="ml-3 flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 text-sm font-semibold hover:bg-purple-500/30 transition-all duration-200"
+              >
+                <Layers size={14} />
+                Admin
+              </Link>
+            )}
           </nav>
 
           {/* Mobile toggle */}
@@ -93,14 +97,16 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <Link
-                href="/builder"
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-black text-sm font-semibold"
-              >
-                <Layers size={14} />
-                Page Builder
-              </Link>
+              {isAdmin && (
+                <Link
+                  href="/builder"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 text-sm font-semibold"
+                >
+                  <Layers size={14} />
+                  Admin: Page Builder
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

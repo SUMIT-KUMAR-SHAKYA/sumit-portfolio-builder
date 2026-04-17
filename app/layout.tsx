@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { AdminProvider } from "@/context/AdminContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,7 +44,9 @@ export default function RootLayout({
       <body className="antialiased bg-[#030712] text-[#f8fafc] w-full min-h-screen relative overflow-x-hidden">
         {/* Floating Lines Master Background */}
         <div className="fixed inset-0 z-[-10] pointer-events-none floating-lines-bg opacity-30" />
-        {children}
+        <AdminProvider>
+          {children}
+        </AdminProvider>
       </body>
     </html>
   );
