@@ -324,7 +324,8 @@ const ProfileCardComponent = ({
                   className="avatar object-cover"
                   src={avatarUrl}
                   alt={`${name || 'User'} avatar`}
-                  layout="fill"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 384px"
                   unoptimized
                   onError={() => setImgError(true)}
                 />
