@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowDown, Layers, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowDown, ExternalLink, Sparkles } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
 import GradientText from "@/components/react-bits/GradientText";
@@ -129,14 +128,7 @@ export default function HeroSection() {
             />
           </a>
 
-          <Link
-            id="hero-builder-btn"
-            href="/builder"
-            className="group flex items-center gap-2 px-8 py-4 rounded-xl border border-[#1e293b] bg-[#0f172a] text-[#94a3b8] font-semibold text-sm hover:border-teal-500/50 hover:text-[#f8fafc] transition-all duration-300"
-          >
-            <Layers size={15} />
-            Open Page Builder
-          </Link>
+
 
           <a
             id="hero-github-btn"
