@@ -110,25 +110,39 @@ export default function ContactSection() {
 
           {/* Social links */}
           <div className="p-4 rounded-xl glass-card">
-            <div className="text-xs text-[#475569] mb-3">Find me on</div>
-            <div className="flex gap-3">
-              {[
-                { Icon: GitHubIcon, href: siteOwner.socials.github, label: "GitHub" },
-                { Icon: LinkedInIcon, href: siteOwner.socials.linkedin, label: "LinkedIn" },
-                { Icon: XIcon, href: siteOwner.socials.twitter, label: "Twitter / X" },
-              ].map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg border border-[#1e293b] text-[#475569] hover:text-[#2dd4bf] hover:border-teal-500/40 hover:bg-teal-500/5 transition-all duration-200 text-xs"
-                >
-                  <Icon size={14} />
-                  {label.split(" ")[0]}
-                </a>
-              ))}
+            <div className="text-xs text-[#475569] mb-3 font-semibold uppercase tracking-widest">Connect with me</div>
+            <div className="flex flex-col gap-3">
+              <a
+                href={siteOwner.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between p-4 rounded-xl border border-teal-500/20 bg-teal-500/5 text-teal-400 hover:border-teal-500/60 hover:bg-teal-500/10 hover:shadow-[0_0_15px_rgba(45,212,191,0.15)] transition-all duration-300"
+              >
+                <div className="flex items-center gap-3">
+                  <GitHubIcon size={20} className="drop-shadow-[0_0_8px_rgba(45,212,191,0.8)]" />
+                  <span className="font-bold text-sm">github/SUMIT-KUMAR-SHAKYA</span>
+                </div>
+                <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+              
+              <div className="flex gap-3">
+                {[
+                  { Icon: LinkedInIcon, href: siteOwner.socials.linkedin, label: "LinkedIn" },
+                  { Icon: XIcon, href: siteOwner.socials.twitter, label: "X / Twitter" },
+                ].map(({ Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl border border-[#1e293b] text-[#475569] hover:text-[#2dd4bf] hover:border-teal-500/40 hover:bg-teal-500/5 transition-all duration-200 text-xs font-semibold"
+                  >
+                    <Icon size={14} />
+                    {label.split(" ")[0]}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>

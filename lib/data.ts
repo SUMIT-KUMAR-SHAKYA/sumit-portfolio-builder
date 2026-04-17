@@ -2,15 +2,15 @@
 
 export const siteOwner = {
   name: "Sumit Kumar Shakya",
-  title: "Full-Stack & AI/ML Engineer",
-  tagline: "Building impactful products that scale.",
-  bio: "I'm a passionate full-stack developer who loves turning complex problems into elegant, user-friendly solutions. From real-time booking platforms to AI-powered analysis tools — I build things that matter.",
+  title: "IIIT Student | Aspiring Cybersecurity Engineer",
+  tagline: "Securing the digital frontier through code and engineering.",
+  bio: "Aspiring Cybersecurity Engineer and IIIT student focused on building secure, scalable full-stack applications and researching modern threat vectors.",
   location: "India",
   email: "sumit@example.com",
   socials: {
-    github: "https://github.com/sumit",
+    github: "https://github.com/SUMIT-KUMAR-SHAKYA",
     linkedin: "https://linkedin.com/in/sumit",
-    twitter: "https://twitter.com/sumit",
+    twitter: "https://x.com/SumitSh77415816",
   },
 };
 

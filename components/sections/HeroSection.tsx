@@ -78,8 +78,8 @@ export default function HeroSection() {
           className="mb-4"
         >
           <GradientText
-            colors={["#0ea5e9", "#a78bfa", "#2dd4bf"]}
-            animationSpeed={8}
+            colors={["#22d3ee", "#0ea5e9", "#1e40af"]}
+            animationSpeed={6}
             showBorder={false}
             className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05]"
           >
@@ -95,7 +95,7 @@ export default function HeroSection() {
           animate="show"
           className="text-xl sm:text-2xl text-[#94a3b8] font-light mb-6 tracking-wide"
         >
-          Full-Stack Developer | Problem Solver
+          {siteOwner.title}
         </motion.p>
 
         {/* Bio */}
@@ -143,10 +143,10 @@ export default function HeroSection() {
             href={siteOwner.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-8 py-4 rounded-xl border border-[#1e293b] bg-transparent text-[#94a3b8] font-semibold text-sm hover:border-[#334155] hover:text-[#f8fafc] transition-all duration-300"
+            className="group flex items-center gap-2 px-8 py-4 rounded-xl border border-teal-500/30 bg-teal-500/5 text-teal-400 font-bold text-sm hover:bg-teal-500/10 hover:border-teal-500/60 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all duration-300"
           >
-            <GitHubIcon size={15} />
-            GitHub
+            <GitHubIcon size={18} className="drop-shadow-[0_0_8px_rgba(45,212,191,1)]" />
+            Explore GitHub
           </a>
         </motion.div>
 
