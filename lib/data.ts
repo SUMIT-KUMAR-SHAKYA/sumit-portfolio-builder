@@ -50,45 +50,50 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "labor-connect",
-    title: "Labor Connect",
-    description:
-      "A full-stack platform connecting verified local service professionals with customers for fast, reliable, and secure bookings.",
-    longDescription:
-      "Labor Connect bridges the gap between skilled local professionals and customers who need them. Built with a modern dark glassmorphism UI, real-time booking system, background-verified worker profiles, Supabase backend, and an admin dashboard with live analytics.",
-    tags: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    liveUrl: "https://labor-connect-ruddy.vercel.app",
-    githubUrl: "https://github.com/sumit/labor-connect",
+    id: "labor-connect-2",
+    title: "Labour Connect 2.0",
+    description: "A platform for labor employment.",
+    longDescription: "Labour Connect 2.0 bridges the gap between skilled local professionals and customers who need them. Built with a modern dark glassmorphism UI, real-time booking system, background-verified worker profiles, and an admin dashboard.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://labour-connects20.vercel.app",
     badge: "Live",
     badgeColor: "teal",
-    stats: [
-      { label: "Active Users", value: "50K+" },
-      { label: "Service Categories", value: "120+" },
-      { label: "Successful Jobs", value: "2M+" },
-      { label: "Avg Rating", value: "4.9★" },
-    ],
     featured: true,
     color: "#2dd4bf",
   },
   {
+    id: "labor-connect",
+    title: "Labour Connect",
+    description: "A platform for labor employment.",
+    longDescription: "The original Labour Connect platform connecting verified local service professionals with customers for fast, reliable, and secure bookings.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://labor-connect-ruddy.vercel.app",
+    badge: "Live",
+    badgeColor: "cyan",
+    featured: true,
+    color: "#0ea5e9",
+  },
+  {
     id: "movie-sentiment",
     title: "Movie Sentiment Analyzer",
-    description:
-      "An AI/ML pipeline that classifies movie reviews as positive or negative using NLP techniques and a fine-tuned transformer model.",
-    longDescription:
-      "An end-to-end machine learning project that scrapes movie reviews, preprocesses text data, applies TF-IDF and BERT embeddings, and trains a binary sentiment classifier with 94%+ accuracy. Deployed with a Flask API and an interactive React dashboard.",
-    tags: ["Python", "NLP", "TensorFlow", "BERT", "Flask", "React"],
-    githubUrl: "https://github.com/sumit/movie-sentiment",
+    description: "An AI-based project to analyze viewer emotions.",
+    longDescription: "An end-to-end machine learning project that analyzes movie reviews to determine viewer sentiments, giving deep insights into audience reactions.",
+    tags: ["Python", "NLP", "AI/ML", "React"],
     badge: "AI/ML",
     badgeColor: "purple",
-    stats: [
-      { label: "Accuracy", value: "94%+" },
-      { label: "Dataset Size", value: "50K+" },
-      { label: "Model", value: "BERT" },
-      { label: "Language", value: "Python" },
-    ],
     featured: true,
     color: "#a78bfa",
+  },
+  {
+    id: "food-delivery",
+    title: "Smart Food Delivery System",
+    description: "A logistics and food tech solution.",
+    longDescription: "A comprehensive solution handling routing, logistics, and real-time tracking for food delivery services.",
+    tags: ["React", "Logistics", "Routing", "WebSockets"],
+    badge: "Open Source",
+    badgeColor: "teal",
+    featured: true,
+    color: "#f43f5e",
   },
 ];
 

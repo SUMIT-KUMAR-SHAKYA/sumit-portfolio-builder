@@ -1,11 +1,42 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { GitHubIcon, XIcon, LinkedInIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
 
 export default function ContactSection() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id.replace('contact-', '')]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (err) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
   return (
     <section id="contact" className="section-padding max-w-7xl mx-auto">
       <motion.div
@@ -109,14 +140,36 @@ export default function ContactSection() {
         >
           <form
             id="contact-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert(
-                "Message sent! (This is a UI demo — connect a backend like Resend to activate.)"
-              );
-            }}
-            className="glass-card rounded-2xl p-6 sm:p-8 space-y-5"
+            onSubmit={handleSubmit}
+            className="glass-card rounded-2xl p-6 sm:p-8 space-y-5 relative"
           >
+            {status === "success" && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0f1e]/90 backdrop-blur z-10 rounded-2xl p-6 sm:p-8 text-center animate-in fade-in zoom-in duration-300">
+                <div className="w-16 h-16 bg-teal-500/20 text-teal-400 rounded-full flex items-center justify-center mb-4">
+                  <CheckCircle2 size={32} />
+                </div>
+                <h3 className="text-2xl font-bold text-[#f8fafc] mb-2">Message Sent!</h3>
+                <p className="text-[#94a3b8]">I will get back to you as soon as possible.</p>
+              </div>
+            )}
+            
+            {status === "error" && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0f1e]/90 backdrop-blur z-10 rounded-2xl p-6 sm:p-8 text-center animate-in fade-in zoom-in duration-300">
+                <div className="w-16 h-16 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mb-4">
+                  <AlertCircle size={32} />
+                </div>
+                <h3 className="text-2xl font-bold text-[#f8fafc] mb-2">Something went wrong!</h3>
+                <p className="text-[#94a3b8]">Failed to send message. Please try again later.</p>
+                <button 
+                  type="button" 
+                  onClick={() => setStatus("idle")}
+                  className="mt-4 px-6 py-2 rounded-lg bg-[#1e293b] text-white hover:bg-[#334155] transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            )}
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {[
                 {
@@ -124,12 +177,14 @@ export default function ContactSection() {
                   label: "Name",
                   type: "text",
                   placeholder: "Your name",
+                  value: formData.name
                 },
                 {
                   id: "contact-email",
                   label: "Email",
                   type: "email",
                   placeholder: "your@email.com",
+                  value: formData.email
                 },
               ].map((field) => (
                 <div key={field.id}>
@@ -142,6 +197,9 @@ export default function ContactSection() {
                   <input
                     id={field.id}
                     type={field.type}
+                    value={field.value}
+                    onChange={handleChange}
+                    required
                     placeholder={field.placeholder}
                     className="w-full px-4 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-[#f8fafc] placeholder-[#334155] text-sm focus:outline-none focus:border-teal-500/60 focus:ring-1 focus:ring-teal-500/30 transition-all"
                   />
@@ -159,6 +217,9 @@ export default function ContactSection() {
               <input
                 id="contact-subject"
                 type="text"
+                value={formData.subject}
+                onChange={handleChange}
+                required
                 placeholder="What's this about?"
                 className="w-full px-4 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-[#f8fafc] placeholder-[#334155] text-sm focus:outline-none focus:border-teal-500/60 focus:ring-1 focus:ring-teal-500/30 transition-all"
               />
@@ -174,6 +235,9 @@ export default function ContactSection() {
               <textarea
                 id="contact-message"
                 rows={5}
+                value={formData.message}
+                onChange={handleChange}
+                required
                 placeholder="Tell me about your project..."
                 className="w-full px-4 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-[#f8fafc] placeholder-[#334155] text-sm focus:outline-none focus:border-teal-500/60 focus:ring-1 focus:ring-teal-500/30 transition-all resize-none"
               />
@@ -182,15 +246,12 @@ export default function ContactSection() {
             <button
               id="contact-submit-btn"
               type="submit"
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-black font-bold text-sm btn-shimmer hover:from-teal-400 hover:to-cyan-400 transition-all duration-300 shadow-lg shadow-teal-500/20"
+              disabled={status === "loading"}
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-black font-bold text-sm btn-shimmer hover:from-teal-400 hover:to-cyan-400 transition-all duration-300 shadow-lg shadow-teal-500/20 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Send Message
-              <Send size={14} />
+              {status === "loading" ? "Sending..." : "Send Message"}
+              {status !== "loading" && <Send size={14} />}
             </button>
-
-            <p className="text-center text-xs text-[#334155]">
-              UI demo — connect Resend or EmailJS to activate sending.
-            </p>
           </form>
         </motion.div>
       </div>

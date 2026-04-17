@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 import { ExternalLink, FolderOpen, Star } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/BrandIcons";
+import BorderGlow from "@/components/react-bits/BorderGlow";
+import GlitchText from "@/components/react-bits/GlitchText";
 
 const badgeStyles = {
   teal: "bg-teal-500/15 text-teal-400 border-teal-500/30",
@@ -48,122 +50,120 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.15, duration: 0.6 }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="group relative glass-card rounded-2xl overflow-hidden"
+              className="group relative rounded-2xl overflow-hidden h-full"
             >
-              {/* Top accent bar */}
-              <div
-                className="h-1 w-full"
-                style={{
-                  background: `linear-gradient(90deg, ${project.color}, ${project.color}80)`,
-                }}
-              />
+              <BorderGlow
+                backgroundColor="#0a0f1e"
+                colors={[project.color, project.color, project.color]}
+                className="h-full rounded-2xl"
+              >
+                {/* Top accent bar */}
+                <div
+                  className="h-1 w-full"
+                  style={{
+                    background: `linear-gradient(90deg, ${project.color}, ${project.color}80)`,
+                  }}
+                />
 
-              <div className="p-6 sm:p-8">
-                {/* Header row */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ background: `${project.color}20` }}
-                    >
-                      <Star size={16} style={{ color: project.color }} />
-                    </div>
-                    <div>
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${
-                          badgeStyles[project.badgeColor]
-                        }`}
+                <div className="p-6 sm:p-8 flex flex-col h-full">
+                  {/* Header row */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: `${project.color}20` }}
                       >
-                        {project.badge}
-                      </span>
+                        <Star size={16} style={{ color: project.color }} />
+                      </div>
+                      <div>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${
+                            badgeStyles[project.badgeColor]
+                          }`}
+                        >
+                          {project.badge}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Action links */}
+                    <div className="flex items-center gap-2">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="GitHub"
+                          className="p-2 rounded-lg text-[#475569] hover:text-[#f8fafc] hover:bg-[#1e293b] transition-colors"
+                        >
+                          <GitHubIcon size={15} />
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Live Demo"
+                          className="p-2 rounded-lg text-[#475569] hover:text-[#2dd4bf] hover:bg-[#1e293b] transition-colors"
+                        >
+                          <ExternalLink size={15} />
+                        </a>
+                      )}
                     </div>
                   </div>
 
-                  {/* Action links */}
-                  <div className="flex items-center gap-2">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="GitHub"
-                        className="p-2 rounded-lg text-[#475569] hover:text-[#f8fafc] hover:bg-[#1e293b] transition-colors"
-                      >
-                        <GitHubIcon size={15} />
-                      </a>
-                    )}
+                  {/* Title & Description */}
+                  {project.id === "movie-sentiment" ? (
+                    <div className="mb-2">
+                      <GlitchText speed={1} enableShadows={true} enableOnHover={true} className="text-xl sm:text-2xl">
+                        {project.title}
+                      </GlitchText>
+                    </div>
+                  ) : (
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#f8fafc] mb-2">
+                      {project.title}
+                    </h3>
+                  )}
+                  
+                  <p className="text-[#94a3b8] text-sm leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <p className="text-[#475569] text-xs leading-relaxed mb-6">
+                    {project.longDescription}
+                  </p>
+
+                  <div className="mt-auto">
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag: string) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 text-xs rounded-md bg-[#1e293b] text-[#475569] border border-[#334155]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Live link CTA */}
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Live Demo"
-                        className="p-2 rounded-lg text-[#475569] hover:text-[#2dd4bf] hover:bg-[#1e293b] transition-colors"
+                        className="group/btn mt-6 flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-teal-500/30 bg-teal-500/10 text-teal-400 text-sm font-semibold hover:bg-teal-500/20 hover:border-teal-500/50 transition-all duration-200"
                       >
-                        <ExternalLink size={15} />
+                        View Live Project
+                        <ExternalLink
+                          size={14}
+                          className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
+                        />
                       </a>
                     )}
                   </div>
                 </div>
-
-                {/* Title & Description */}
-                <h3 className="text-xl sm:text-2xl font-bold text-[#f8fafc] mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-[#94a3b8] text-sm leading-relaxed mb-4">
-                  {project.description}
-                </p>
-                <p className="text-[#475569] text-xs leading-relaxed mb-6">
-                  {project.longDescription}
-                </p>
-
-                {/* Stats */}
-                {project.stats && (
-                  <div className="grid grid-cols-4 gap-3 mb-6 p-4 rounded-xl bg-[#0a0f1e] border border-[#1e293b]">
-                    {project.stats.map((stat) => (
-                      <div key={stat.label} className="text-center">
-                        <div
-                          className="text-lg font-black"
-                          style={{ color: project.color }}
-                        >
-                          {stat.value}
-                        </div>
-                        <div className="text-xs text-[#475569] mt-0.5 leading-tight">
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 text-xs rounded-md bg-[#1e293b] text-[#475569] border border-[#334155]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Live link CTA */}
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/btn mt-6 flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-teal-500/30 bg-teal-500/10 text-teal-400 text-sm font-semibold hover:bg-teal-500/20 hover:border-teal-500/50 transition-all duration-200"
-                  >
-                    View Live Project
-                    <ExternalLink
-                      size={14}
-                      className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
-                    />
-                  </a>
-                )}
-              </div>
+              </BorderGlow>
 
               {/* Hover glow */}
               <motion.div

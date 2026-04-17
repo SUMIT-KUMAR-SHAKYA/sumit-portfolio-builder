@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { skills, siteOwner } from "@/lib/data";
 import { User, Code2, Cpu, Server } from "lucide-react";
+import ProfileCard from "@/components/react-bits/ProfileCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -32,8 +33,9 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="flex flex-col items-center justify-center lg:items-start"
         >
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-6 w-full justify-center lg:justify-start">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
               <User size={18} className="text-black" />
             </div>
@@ -42,40 +44,23 @@ export default function AboutSection() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-[#f8fafc] mb-6 leading-tight">
-            Crafting Digital
-            <br />
-            <span className="gradient-text">Experiences</span>
-          </h2>
-
-          <p className="text-[#94a3b8] leading-relaxed mb-6 text-base sm:text-lg">
-            {siteOwner.bio}
-          </p>
-
-          <p className="text-[#475569] leading-relaxed text-sm sm:text-base">
-            My journey spans from building enterprise-grade booking platforms
-            with real-time data to training AI models that understand human
-            sentiment. I love the full spectrum — pixels to pipelines.
-          </p>
-
-          {/* Quick facts */}
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            {[
-              { label: "Location", value: siteOwner.location },
-              { label: "Focus", value: "Full-Stack + AI/ML" },
-              { label: "Email", value: siteOwner.email },
-              { label: "Status", value: "Open to work 🟢" },
-            ].map((fact) => (
-              <div
-                key={fact.label}
-                className="p-3 rounded-xl border border-[#1e293b] bg-[#0d1526]"
-              >
-                <div className="text-xs text-[#475569] mb-1">{fact.label}</div>
-                <div className="text-sm text-[#f8fafc] font-medium truncate">
-                  {fact.value}
-                </div>
-              </div>
-            ))}
+          <div className="w-full flex justify-center lg:justify-start">
+            <ProfileCard
+              name="Sumit Shakya"
+              title="IIIT Student | Aspiring Cybersecurity Engineer"
+              handle="sumit"
+              status="Open to work 🟢"
+              contactText="Contact Me"
+              avatarUrl="https://github.com/sumit.png"
+              showUserInfo={true}
+              enableTilt={true}
+              behindGlowColor="rgba(45, 212, 191, 0.4)"
+              innerGradient="linear-gradient(145deg, #0a0f1e 0%, #0f172a 100%)"
+              className="w-full max-w-sm"
+              onContactClick={() => {
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
           </div>
         </motion.div>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowDown, Layers, ExternalLink, Sparkles } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/BrandIcons";
 import { siteOwner } from "@/lib/data";
+import GradientText from "@/components/react-bits/GradientText";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -69,17 +70,22 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Name */}
-        <motion.h1
+        <motion.div
           custom={1}
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-[#f8fafc] mb-4 leading-[1.05]"
+          className="mb-4"
         >
-          Sumit Kumar
-          <br />
-          <span className="gradient-text">Shakya</span>
-        </motion.h1>
+          <GradientText
+            colors={["#0ea5e9", "#a78bfa", "#2dd4bf"]}
+            animationSpeed={8}
+            showBorder={false}
+            className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05]"
+          >
+            Sumit Kumar Shakya
+          </GradientText>
+        </motion.div>
 
         {/* Title */}
         <motion.p
@@ -89,7 +95,7 @@ export default function HeroSection() {
           animate="show"
           className="text-xl sm:text-2xl text-[#94a3b8] font-light mb-6 tracking-wide"
         >
-          {siteOwner.title}
+          Full-Stack Developer | Problem Solver
         </motion.p>
 
         {/* Bio */}

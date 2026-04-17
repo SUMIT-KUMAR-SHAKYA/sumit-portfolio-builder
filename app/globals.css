@@ -84,10 +84,21 @@ body {
 /* ─── Grid background ─── */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(45, 212, 191, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.04) 1px, transparent 1px);
   background-size: 50px 50px;
+  animation: floatingGrid 20s linear infinite;
 }
+
+@keyframes floatingGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
 
 /* ─── Shimmer button ─── */
 .btn-shimmer {
